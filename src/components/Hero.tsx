@@ -3,33 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const projects = [
-  {
-    title: "Brian Noland",
-    category: "Luxury Real Estate",
-    image: "/projects/brian-noland/hero.webp",
-    className: "top-10 right-0 md:right-20"
-  },
-  {
-    title: "ChuneLab",
-    category: "Music Technology",
-    image: "/projects/chunelab.png",
-    className: "bottom-10 left-0 md:left-20"
-  },
-  {
-    title: "Driftkid",
-    category: "Creative Experience",
-    image: "/projects/driftkid.png",
-    className: "top-32 left-10 md:left-40"
-  },
-  {
-    title: "Solana Risk Radar",
-    category: "Data Application",
-    image: "/projects/solana-risk-radar.png",
-    className: "bottom-20 right-10 md:right-40"
-  }
-];
-
 export default function Hero() {
 
 return (
@@ -40,38 +13,65 @@ min-h-screen
 overflow-hidden
 flex
 items-center
+justify-center
 px-6
+pt-32
 ">
 
 <div className="
-max-w-7xl
-mx-auto
+absolute
+inset-0
+bg-gradient-to-b
+from-purple-500/10
+via-transparent
+to-transparent
+"/>
+
+
+<div className="
 relative
 z-10
+max-w-6xl
+mx-auto
 text-center
 ">
 
+
 <motion.p
-initial={{opacity:0,y:20}}
-animate={{opacity:1,y:0}}
+
+initial={{opacity:0}}
+
+animate={{opacity:1}}
+
 className="
 uppercase
-tracking-[0.4em]
+tracking-[.5em]
 text-sm
-text-white/50
+text-white/40
 "
+
 >
+
 Next Design Studio
+
 </motion.p>
 
 
 <motion.h1
 
-initial={{opacity:0,y:30}}
+initial={{
+opacity:0,
+y:30
+}}
 
-animate={{opacity:1,y:0}}
+animate={{
+opacity:1,
+y:0
+}}
 
-transition={{delay:.15}}
+transition={{
+duration:.8
+}}
 
 className="
 mt-8
@@ -90,7 +90,9 @@ Websites are everywhere.
 <span className="
 text-white/40
 ">
+
 Experiences are not.
+
 </span>
 
 </motion.h1>
@@ -98,16 +100,22 @@ Experiences are not.
 
 <motion.p
 
-initial={{opacity:0}}
+initial={{
+opacity:0
+}}
 
-animate={{opacity:1}}
+animate={{
+opacity:1
+}}
 
-transition={{delay:.4}}
+transition={{
+delay:.4
+}}
 
 className="
-mt-8
 max-w-3xl
 mx-auto
+mt-8
 text-xl
 text-white/60
 "
@@ -115,8 +123,8 @@ text-white/60
 >
 
 Asheville web design and development studio creating
-premium websites, applications, and AI-powered digital experiences
-for businesses across Western North Carolina.
+premium websites, applications, and AI-powered digital
+experiences.
 
 </motion.p>
 
@@ -142,6 +150,7 @@ font-semibold
 View Work
 </a>
 
+
 <a
 href="/contact"
 className="
@@ -155,57 +164,89 @@ py-4
 Start Project
 </a>
 
-</div>
 
 </div>
 
 
-{
-projects.map((project,index)=>(
 
 <motion.div
 
-key={project.title}
-
 initial={{
 opacity:0,
-scale:.8
+scale:.9,
+y:50
 }}
 
 animate={{
 opacity:1,
-scale:1
+scale:1,
+y:0
 }}
 
 transition={{
-delay:.3+index*.15
+delay:.5,
+duration:1
 }}
 
-className={`
+className="
+relative
+mx-auto
+mt-20
+max-w-5xl
+"
+
+>
+
+
+<div className="
 absolute
-hidden
-md:block
-${project.className}
-w-64
+inset-0
+bg-purple-500/20
+blur-3xl
+rounded-full
+"/>
+
+
+<motion.div
+
+animate={{
+rotateX:[0,3,0],
+rotateY:[0,-3,0]
+}}
+
+transition={{
+repeat:Infinity,
+duration:8
+}}
+
+className="
+relative
 rounded-3xl
-overflow-hidden
 border
 border-white/10
-bg-black/60
+overflow-hidden
 shadow-2xl
-`}
+bg-black
+"
+
+
+style={{
+perspective:1000
+}}
+
 >
+
 
 <div className="
 relative
-h-40
+aspect-video
 ">
 
 <Image
 
-src={project.image}
+src="/projects/brian-noland/hero.webp"
 
-alt={project.title}
+alt="Brian Noland website"
 
 fill
 
@@ -217,24 +258,32 @@ className="object-cover"
 
 
 <div className="
-p-5
-">
+absolute
+bottom-0
+left-0
+right-0
+p-6
+text-left
+bg-gradient-to-t
+from-black
+"
+
+>
 
 <p className="
 font-semibold
+text-xl
 ">
 
-{project.title}
+Brian Noland
 
 </p>
 
 <p className="
-text-sm
 text-white/50
-mt-1
 ">
 
-{project.category}
+Luxury Real Estate Experience
 
 </p>
 
@@ -243,9 +292,56 @@ mt-1
 
 </motion.div>
 
+
+</motion.div>
+
+
+
+<div className="
+mt-10
+flex
+justify-center
+gap-4
+flex-wrap
+">
+
+{
+[
+"ChuneLab",
+"Driftkid",
+"AI Applications",
+"Solana Risk Radar"
+].map(item=>(
+
+<div
+
+key={item}
+
+className="
+rounded-full
+border
+border-white/10
+px-5
+py-2
+text-sm
+text-white/60
+"
+
+>
+
+{item}
+
+</div>
+
 ))
 
 }
+
+</div>
+
+
+</div>
+
 
 </section>
 
