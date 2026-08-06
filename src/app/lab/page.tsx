@@ -1,2 +1,32 @@
-const items=["AI-assisted music workflows","Interactive motion systems","3D and WebGL experiments","Creative coding","Blockchain interfaces","Experimental UI concepts"];
-export default function Lab(){return <main style={{padding:"160px 0 120px"}}><div className="container"><div className="eyebrow">Next Design Lab</div><h1 className="display" style={{marginTop:28,fontSize:"clamp(4rem,10vw,9rem)"}}>Beyond the ordinary.</h1><div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14,marginTop:60}} className="lab-grid">{items.map((x,i)=><div key={x} className="glass" style={{minHeight:230,borderRadius:26,padding:28,display:"flex",flexDirection:"column",justifyContent:"space-between"}}><span style={{color:"#8b5cf6",fontSize:13}}>0{i+1}</span><h2 style={{fontSize:26,letterSpacing:"-.04em",margin:0}}>{x}</h2></div>)}</div></div><style>{`@media(max-width:800px){.lab-grid{grid-template-columns:1fr 1fr!important}}@media(max-width:520px){.lab-grid{grid-template-columns:1fr!important}}`}</style></main>}
+import Link from "next/link";
+import { ArrowUpRight, AudioWaveform, Boxes, BrainCircuit, Network, Orbit, ScanLine } from "lucide-react";
+
+const experiments = [
+  {number:"01",title:"AI-assisted music workflows",copy:"Creative tools that help artists explore, organize, and move from idea to finished work.",Icon:AudioWaveform,tone:"violet"},
+  {number:"02",title:"Interactive motion systems",copy:"Purposeful animation languages designed to give interfaces rhythm, hierarchy, and life.",Icon:ScanLine,tone:"blue"},
+  {number:"03",title:"3D and WebGL experiments",copy:"Spatial interface concepts, immersive scenes, and browser-native visual storytelling.",Icon:Boxes,tone:"cyan"},
+  {number:"04",title:"Creative intelligence",copy:"Practical uses of AI for ideation, synthesis, personalization, and new product behavior.",Icon:BrainCircuit,tone:"pink"},
+  {number:"05",title:"Connected platforms",copy:"Interfaces that make complex data, systems, and communities feel understandable.",Icon:Network,tone:"indigo"},
+  {number:"06",title:"Experimental UI concepts",copy:"Interaction studies that test what digital products can feel like before they become familiar.",Icon:Orbit,tone:"purple"},
+];
+
+export default function Lab(){return <main className="lab-page">
+  <section className="lab-hero container">
+    <div className="eyebrow">Next Design Lab</div>
+    <div className="lab-hero-grid"><h1>Beyond the <span>ordinary.</span></h1><div><p>A space for prototypes, emerging technology, and interaction ideas that do not fit neatly inside a conventional brief.</p><small>Experiments become capabilities. Capabilities become better client work.</small></div></div>
+  </section>
+
+  <section className="lab-experiments container">
+    {experiments.map(({number,title,copy,Icon,tone})=><article className={`lab-card lab-${tone}`} key={number}>
+      <div className="lab-card-top"><span>{number}</span><Icon size={24}/></div>
+      <div className="lab-visual" aria-hidden="true"><i/><i/><i/><b/></div>
+      <div className="lab-card-copy"><h2>{title}</h2><p>{copy}</p></div>
+    </article>)}
+  </section>
+
+  <section className="lab-callout container">
+    <div><span className="eyebrow">A useful kind of curiosity</span><h2>Exploration with a purpose.</h2></div>
+    <p>The Lab is not technology for technology&apos;s sake. It is where new tools are tested, understood, and translated into experiences people can actually use.</p>
+    <Link href="/contact">Bring an idea <ArrowUpRight size={18}/></Link>
+  </section>
+</main>}
