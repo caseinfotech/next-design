@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, AudioWaveform, Boxes, BrainCircuit, Network, Orbit, ScanLine } from "lucide-react";
 
@@ -9,6 +10,12 @@ const experiments = [
   {number:"05",title:"Connected platforms",copy:"Interfaces that make complex data, systems, and communities feel understandable.",Icon:Network,tone:"indigo"},
   {number:"06",title:"Experimental UI concepts",copy:"Interaction studies that test what digital products can feel like before they become familiar.",Icon:Orbit,tone:"purple"},
 ];
+
+export const metadata: Metadata = {
+  title: "Digital Innovation Lab",
+  description: "Explore Next Design experiments in AI-assisted workflows, WebGL, motion systems, connected platforms, and emerging digital product experiences.",
+  alternates: { canonical: "/lab" },
+};
 
 export default function Lab(){return <main className="lab-page">
   <section className="lab-hero container">

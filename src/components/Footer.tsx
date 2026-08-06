@@ -1,2 +1,12 @@
 import Link from "next/link";
-export default function Footer(){return <footer style={{borderTop:"1px solid var(--line)",padding:"34px 0 44px"}}><div className="container" style={{display:"flex",justifyContent:"space-between",gap:20,flexWrap:"wrap",color:"#85838f",fontSize:13}}><strong style={{color:"white"}}>NEXT DESIGN</strong><span>Designed and engineered with Next.js, TypeScript, and modern web technology.</span><div style={{display:"flex",gap:16}}><Link href="/work/brian-noland">Work</Link><Link href="/contact">Contact</Link></div></div></footer>}
+
+const footerLinks = [
+  ["Web Design", "/services/asheville-web-design"],
+  ["Development", "/services/web-development"],
+  ["AI Applications", "/services/ai-applications"],
+  ["Real Estate", "/services/real-estate-websites"],
+  ["Work", "/#work"],
+  ["Contact", "/contact"],
+];
+
+export default function Footer(){return <footer className="site-footer"><div className="container footer-inner"><div><strong>NEXT DESIGN</strong><span>Asheville web design, development, and digital product studio.</span></div><nav aria-label="Footer navigation">{footerLinks.map(([label,href])=><Link href={href} key={href}>{label}</Link>)}</nav></div></footer>}
