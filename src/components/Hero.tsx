@@ -53,6 +53,7 @@ export default function Hero() {
             priority
           />
           <div className="hero-showcase-sheen" aria-hidden="true" />
+          <div className="hero-showcase-scroll" aria-hidden="true"><span>Scroll to explore</span><i/><b/></div>
         </motion.div>
 
         <motion.div className="hero-meta" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:1}}>

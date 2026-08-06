@@ -629,6 +629,47 @@ button, input, textarea, select { font: inherit; }
   animation: hero-shine 8s 2s ease-in-out infinite;
 }
 
+.hero-showcase::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 48%;
+  height: 42px;
+  pointer-events: none;
+  background: linear-gradient(90deg,transparent,#030304 28%);
+}
+
+.hero-showcase-scroll {
+  position: absolute;
+  right: 12px;
+  bottom: 9px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(255,255,255,.68);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .48rem;
+  font-weight: 700;
+}
+
+.hero-showcase-scroll i {
+  display: block;
+  width: 58px;
+  height: 1px;
+  background: linear-gradient(90deg,#6941ef,#d14bff);
+}
+
+.hero-showcase-scroll b {
+  width: 12px;
+  height: 20px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 999px;
+}
+
 .hero-meta {
   grid-column: 1 / -1;
   display: flex;
@@ -748,6 +789,7 @@ button, input, textarea, select { font: inherit; }
   .hero-copy { max-width: 340px; }
   .hero-showcase { height: 76vw; min-height: 290px; }
   .hero-showcase { height: auto; min-height: 0; margin: 20px 0 12px; }
+  .hero-showcase-scroll { display: none; }
   .hero-meta { min-height: 62px; }
   .hero-meta a { display: none; }
   .work-heading { display: block; }
@@ -1061,32 +1103,126 @@ button, input, textarea, select { font: inherit; }
   right: 24px;
   bottom: 24px;
   z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .floating-contact-panel {
   width: min(340px, calc(100vw - 40px));
   margin-bottom: 20px;
-  padding: 32px;
+  padding: 26px;
   border: 1px solid var(--line);
-  border-radius: 24px;
-  background: rgba(5,5,5,.92);
+  border-radius: 20px;
+  background: rgba(5,5,7,.96);
   box-shadow: 0 24px 70px rgba(0,0,0,.5);
   backdrop-filter: blur(20px);
+}
+
+.floating-contact-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8d8996;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .52rem;
+  font-weight: 700;
+}
+
+.floating-contact-status span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7c3aed;
+  box-shadow: 0 0 12px #8b5cf6;
+}
+
+.floating-contact-panel h3 {
+  margin: 20px 0 0;
+  font-size: 1.65rem;
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.floating-contact-panel > p {
+  margin: 10px 0 0;
+  color: #8e8b96;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+
+.floating-contact-options {
+  display: grid;
+  gap: 7px;
+  margin-top: 22px;
+}
+
+.floating-contact-options button {
+  width: 100%;
+  min-height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,.025);
+  color: #bbb8c4;
+  text-align: left;
+  font-size: .76rem;
+  cursor: pointer;
+  transition: border-color .2s ease,background .2s ease,color .2s ease;
+}
+
+.floating-contact-options button:hover,
+.floating-contact-options button.is-selected {
+  border-color: rgba(124,92,246,.55);
+  background: rgba(124,92,246,.1);
+  color: white;
+}
+
+.floating-contact-options button i {
+  color: #9a6bff;
+  font-style: normal;
+}
+
+.floating-contact-cta {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 0 16px;
+  border-radius: 8px;
+  background: linear-gradient(105deg,#2378ff,#a62cff);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .58rem;
+  font-weight: 800;
+  box-shadow: 0 12px 30px rgba(91,53,255,.22);
 }
 
 .floating-contact-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 52px;
-  padding: 0 24px;
+  min-height: 48px;
+  padding: 0 19px;
   border: 1px solid rgba(255,255,255,.22);
   border-radius: 999px;
   background: #fff;
   color: #050505;
   font-weight: 700;
+  font-size: .76rem;
   cursor: pointer;
   box-shadow: 0 16px 40px rgba(0,0,0,.35);
+}
+
+.floating-contact-trigger span {
+  margin-left: 10px;
+  font-size: .95rem;
 }
 
 @media (max-width: 720px) {
@@ -1096,8 +1232,10 @@ button, input, textarea, select { font: inherit; }
   }
 
   .floating-contact-trigger {
-    min-height: 46px;
-    padding: 0 18px;
-    font-size: .86rem;
+    min-height: 44px;
+    padding: 0 16px;
+    font-size: .72rem;
   }
+
+  .floating-contact-panel { padding: 22px; }
 }

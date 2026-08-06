@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export default function FloatingContact() {
 
   const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState("Website Design");
 
   return (
     <div className="floating-contact">
@@ -16,28 +17,14 @@ export default function FloatingContact() {
             initial={{opacity:0, y:30, scale:.9}}
             animate={{opacity:1, y:0, scale:1}}
             exit={{opacity:0, y:30, scale:.9}}
-            className="floating-contact-panel
-              mb-5
-              w-[340px]
-              rounded-3xl
-              border
-              border-white/10
-              bg-black/90
-              backdrop-blur-xl
-              p-8
-              shadow-2xl
-            "
+            className="floating-contact-panel"
+            id="floating-project-panel"
           >
+            <div className="floating-contact-status"><span /> Available for select projects</div>
+            <h3>Start a project.</h3>
+            <p>What are you interested in building?</p>
 
-            <h3 className="text-2xl font-bold">
-              Start a Project
-            </h3>
-
-            <p className="mt-3 text-white/60">
-              Tell us what you are building.
-            </p>
-
-            <div className="mt-6 space-y-3">
+            <div className="floating-contact-options">
 
               {[
                 "Website Design",
@@ -47,38 +34,21 @@ export default function FloatingContact() {
               ].map(item => (
                 <button
                   key={item}
-                  className="
-                    w-full
-                    rounded-xl
-                    border
-                    border-white/10
-                    px-4
-                    py-3
-                    text-left
-                    hover:bg-white/10
-                  "
+                  type="button"
+                  className={selected === item ? "is-selected" : ""}
+                  onClick={() => setSelected(item)}
                 >
-                  {item}
+                  <span>{item}</span><i>{selected === item ? "✓" : "→"}</i>
                 </button>
               ))}
 
             </div>
 
             <a
-              href="/contact"
-              className="
-                mt-6
-                block
-                rounded-full
-                bg-white
-                px-6
-                py-3
-                text-center
-                font-semibold
-                text-black
-              "
+              href={`/contact?project=${encodeURIComponent(selected)}`}
+              className="floating-contact-cta"
             >
-              Start Your Project →
+              Continue to project inquiry <span>↗</span>
             </a>
 
           </motion.div>
@@ -88,19 +58,11 @@ export default function FloatingContact() {
 
       <button
         onClick={() => setOpen(!open)}
-        className="floating-contact-trigger
-          rounded-full
-          bg-red-500
-          px-8
-          py-5
-          font-bold
-          text-white
-          shadow-xl
-          border-4
-          border-white
-        "
+        className="floating-contact-trigger"
+        aria-expanded={open}
+        aria-controls="floating-project-panel"
       >
-        {open ? "Close" : "Start Project"}
+        {open ? "Close" : "Start Project"}<span>{open ? "×" : "↗"}</span>
       </button>
 
     </div>
