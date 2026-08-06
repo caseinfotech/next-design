@@ -4,8 +4,11 @@ export type Project = {
   category: string;
   description: string;
   image: string;
+  gallery?: string[];
   technologies: string[];
   accent: string;
+  challenge?: string;
+  solution?: string;
 };
 
 export const projects: Project[] = [
