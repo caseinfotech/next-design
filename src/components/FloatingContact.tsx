@@ -90,13 +90,14 @@ export default function FloatingContact() {
         onClick={() => setOpen(!open)}
         className="
           rounded-full
-          bg-gradient-to-r
-          from-purple-500
-          to-blue-500
-          px-7
-          py-4
-          font-semibold
+          bg-red-500
+          px-8
+          py-5
+          font-bold
+          text-white
           shadow-xl
+          border-4
+          border-white
         "
       >
         {open ? "Close" : "Start Project"}

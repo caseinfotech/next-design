@@ -1,24 +1,254 @@
 "use client";
 
-import { ArrowDownRight, Sparkles } from "lucide-react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
-export default function Hero(){
-  return <section style={{minHeight:"100svh",display:"grid",alignItems:"center",position:"relative",padding:"150px 0 80px",overflow:"hidden"}}>
-    <div className="grid-noise" />
-    <motion.div initial={{opacity:0,scale:.85}} animate={{opacity:1,scale:1}} transition={{duration:1.2}} style={{position:"absolute",width:560,height:560,borderRadius:"50%",background:"radial-gradient(circle, rgba(124,58,237,.28), transparent 68%)",filter:"blur(18px)",right:"-9%",top:"8%"}} />
-    <div className="container" style={{position:"relative",zIndex:2}}>
-      <motion.div initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} className="pill"><Sparkles size={15}/> Independent digital studio</motion.div>
-      <motion.h1 initial={{opacity:0,y:45}} animate={{opacity:1,y:0}} transition={{delay:.12,duration:.9}} className="display" style={{marginTop:30}}>Websites are<br/>everywhere.<br/><span style={{color:"#777583"}}>Experiences are not.</span></motion.h1>
-      <motion.div initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{delay:.28}} style={{marginTop:34,display:"flex",justifyContent:"space-between",alignItems:"end",gap:30,flexWrap:"wrap"}}>
-        <p style={{maxWidth:610,fontSize:"clamp(1rem,2vw,1.28rem)",lineHeight:1.6,color:"var(--muted)",margin:0}}>Next Design creates immersive websites, digital products, and custom applications for real estate, music, boutique brands, and ambitious companies.</p>
-        <div style={{display:"flex",gap:12,flexWrap:"wrap"}}><Link className="btn btn-primary" href="#work">Explore work <ArrowDownRight size={17}/></Link><Link className="btn" href="/contact">Start a project</Link></div>
-      </motion.div>
-      <div style={{marginTop:65,display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:12}} className="hero-stats">
-        {[['Design-led','Every experience starts with a distinct visual idea.'],['Technology-driven','Next.js, TypeScript, Supabase, WordPress and more.'],['Built to perform','Fast, responsive, accessible and conversion-aware.']].map(([t,d],i)=><motion.div key={t} initial={{opacity:0,y:24}} animate={{opacity:1,y:0}} transition={{delay:.45+i*.1}} className="glass" style={{borderRadius:22,padding:22}}><strong>{t}</strong><p style={{margin:"9px 0 0",color:"#9694a0",fontSize:14,lineHeight:1.5}}>{d}</p></motion.div>)}
-      </div>
-    </div>
-    <style jsx>{`@media(max-width:760px){.hero-stats{grid-template-columns:1fr!important}}`}</style>
-  </section>
+const projects = [
+  {
+    title: "Brian Noland",
+    category: "Luxury Real Estate",
+    image: "/projects/brian-noland/hero.webp",
+    className: "top-10 right-0 md:right-20"
+  },
+  {
+    title: "ChuneLab",
+    category: "Music Technology",
+    image: "/projects/chunelab.png",
+    className: "bottom-10 left-0 md:left-20"
+  },
+  {
+    title: "Driftkid",
+    category: "Creative Experience",
+    image: "/projects/driftkid.png",
+    className: "top-32 left-10 md:left-40"
+  },
+  {
+    title: "Solana Risk Radar",
+    category: "Data Application",
+    image: "/projects/solana-risk-radar.png",
+    className: "bottom-20 right-10 md:right-40"
+  }
+];
+
+export default function Hero() {
+
+return (
+
+<section className="
+relative
+min-h-screen
+overflow-hidden
+flex
+items-center
+px-6
+">
+
+<div className="
+max-w-7xl
+mx-auto
+relative
+z-10
+text-center
+">
+
+<motion.p
+initial={{opacity:0,y:20}}
+animate={{opacity:1,y:0}}
+className="
+uppercase
+tracking-[0.4em]
+text-sm
+text-white/50
+"
+>
+Next Design Studio
+</motion.p>
+
+
+<motion.h1
+
+initial={{opacity:0,y:30}}
+
+animate={{opacity:1,y:0}}
+
+transition={{delay:.15}}
+
+className="
+mt-8
+text-6xl
+md:text-8xl
+font-bold
+tracking-tight
+"
+
+>
+
+Websites are everywhere.
+
+<br/>
+
+<span className="
+text-white/40
+">
+Experiences are not.
+</span>
+
+</motion.h1>
+
+
+<motion.p
+
+initial={{opacity:0}}
+
+animate={{opacity:1}}
+
+transition={{delay:.4}}
+
+className="
+mt-8
+max-w-3xl
+mx-auto
+text-xl
+text-white/60
+"
+
+>
+
+Asheville web design and development studio creating
+premium websites, applications, and AI-powered digital experiences
+for businesses across Western North Carolina.
+
+</motion.p>
+
+
+<div className="
+mt-10
+flex
+justify-center
+gap-4
+">
+
+<a
+href="/work"
+className="
+rounded-full
+bg-white
+text-black
+px-8
+py-4
+font-semibold
+"
+>
+View Work
+</a>
+
+<a
+href="/contact"
+className="
+rounded-full
+border
+border-white/20
+px-8
+py-4
+"
+>
+Start Project
+</a>
+
+</div>
+
+</div>
+
+
+{
+projects.map((project,index)=>(
+
+<motion.div
+
+key={project.title}
+
+initial={{
+opacity:0,
+scale:.8
+}}
+
+animate={{
+opacity:1,
+scale:1
+}}
+
+transition={{
+delay:.3+index*.15
+}}
+
+className={`
+absolute
+hidden
+md:block
+${project.className}
+w-64
+rounded-3xl
+overflow-hidden
+border
+border-white/10
+bg-black/60
+shadow-2xl
+`}
+>
+
+<div className="
+relative
+h-40
+">
+
+<Image
+
+src={project.image}
+
+alt={project.title}
+
+fill
+
+className="object-cover"
+
+/>
+
+</div>
+
+
+<div className="
+p-5
+">
+
+<p className="
+font-semibold
+">
+
+{project.title}
+
+</p>
+
+<p className="
+text-sm
+text-white/50
+mt-1
+">
+
+{project.category}
+
+</p>
+
+</div>
+
+
+</motion.div>
+
+))
+
+}
+
+</section>
+
+)
+
 }
