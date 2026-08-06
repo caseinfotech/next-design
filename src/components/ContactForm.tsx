@@ -62,7 +62,7 @@ export default function ContactForm({siteKey}:ContactFormProps){
         <label>Email<input required name="email" type="email" autoComplete="email" maxLength={254} placeholder="you@company.com" /></label>
       </div>
       <label>Company or brand<input name="company" autoComplete="organization" maxLength={120} placeholder="Optional" /></label>
-      <label>What are we building?<select defaultValue="" name="project-type" required><option value="" disabled>Select a project type</option><option>Real Estate Website</option><option>Music / Creative Platform</option><option>Boutique Brand Website</option><option>Custom Application</option></select></label>
+      <label>What are we building?<select defaultValue="" name="project-type" required><option value="" disabled>Select a project type</option><option>Real Estate Website</option><option>Music / Creative Platform</option><option>Boutique Brand Website</option><option>Technology / SaaS</option><option>Custom Application</option></select></label>
       <label>Project details<textarea required name="details" minLength={20} maxLength={5000} placeholder="Goals, audience, timeline, and anything else I should know…" rows={6}/></label>
       <label className="contact-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <div className="turnstile-row">

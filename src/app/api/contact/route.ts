@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export const runtime="nodejs";
 
-const PROJECT_TYPES=new Set(["Real Estate Website","Music / Creative Platform","Boutique Brand Website","Custom Application"]);
+const PROJECT_TYPES=new Set(["Real Estate Website","Music / Creative Platform","Boutique Brand Website","Technology / SaaS","Custom Application"]);
 const EMAIL_PATTERN=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload={
