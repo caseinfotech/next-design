@@ -1,350 +1,64 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function Hero() {
-
-return (
-
-<section className="
-relative
-min-h-screen
-overflow-hidden
-flex
-items-center
-justify-center
-px-6
-pt-32
-">
-
-<div className="
-absolute
-inset-0
-bg-gradient-to-b
-from-purple-500/10
-via-transparent
-to-transparent
-"/>
-
-
-<div className="
-relative
-z-10
-max-w-6xl
-mx-auto
-text-center
-">
-
-
-<motion.p
-
-initial={{opacity:0}}
-
-animate={{opacity:1}}
-
-className="
-uppercase
-tracking-[.5em]
-text-sm
-text-white/40
-"
-
->
-
-Next Design Studio
-
-</motion.p>
-
-
-<motion.h1
-
-initial={{
-opacity:0,
-y:30
-}}
-
-animate={{
-opacity:1,
-y:0
-}}
-
-transition={{
-duration:.8
-}}
-
-className="
-mt-8
-text-6xl
-md:text-8xl
-font-bold
-tracking-tight
-"
-
->
-
-Websites are everywhere.
-
-<br/>
-
-<span className="
-text-white/40
-">
-
-Experiences are not.
-
-</span>
-
-</motion.h1>
-
-
-<motion.p
-
-initial={{
-opacity:0
-}}
-
-animate={{
-opacity:1
-}}
-
-transition={{
-delay:.4
-}}
-
-className="
-max-w-3xl
-mx-auto
-mt-8
-text-xl
-text-white/60
-"
-
->
-
-Asheville web design and development studio creating
-premium websites, applications, and AI-powered digital
-experiences.
-
-</motion.p>
-
-
-<div className="
-mt-10
-flex
-justify-center
-gap-4
-">
-
-<a
-href="/work"
-className="
-rounded-full
-bg-white
-text-black
-px-8
-py-4
-font-semibold
-"
->
-View Work
-</a>
-
-
-<a
-href="/contact"
-className="
-rounded-full
-border
-border-white/20
-px-8
-py-4
-"
->
-Start Project
-</a>
-
-
-</div>
-
-
-
-<motion.div
-
-initial={{
-opacity:0,
-scale:.9,
-y:50
-}}
-
-animate={{
-opacity:1,
-scale:1,
-y:0
-}}
-
-transition={{
-delay:.5,
-duration:1
-}}
-
-className="
-relative
-mx-auto
-mt-20
-max-w-5xl
-"
-
->
-
-
-<div className="
-absolute
-inset-0
-bg-purple-500/20
-blur-3xl
-rounded-full
-"/>
-
-
-<motion.div
-
-animate={{
-rotateX:[0,3,0],
-rotateY:[0,-3,0]
-}}
-
-transition={{
-repeat:Infinity,
-duration:8
-}}
-
-className="
-relative
-rounded-3xl
-border
-border-white/10
-overflow-hidden
-shadow-2xl
-bg-black
-"
-
-
-style={{
-perspective:1000
-}}
-
->
-
-
-<div className="
-relative
-aspect-video
-">
-
-<Image
-
-src="/projects/brian-noland/hero.webp"
-
-alt="Brian Noland website"
-
-fill
-
-className="object-cover"
-
-/>
-
-</div>
-
-
-<div className="
-absolute
-bottom-0
-left-0
-right-0
-p-6
-text-left
-bg-gradient-to-t
-from-black
-"
-
->
-
-<p className="
-font-semibold
-text-xl
-">
-
-Brian Noland
-
-</p>
-
-<p className="
-text-white/50
-">
-
-Luxury Real Estate Experience
-
-</p>
-
-</div>
-
-
-</motion.div>
-
-
-</motion.div>
-
-
-
-<div className="
-mt-10
-flex
-justify-center
-gap-4
-flex-wrap
-">
-
-{
-[
-"ChuneLab",
-"Driftkid",
-"AI Applications",
-"Solana Risk Radar"
-].map(item=>(
-
-<div
-
-key={item}
-
-className="
-rounded-full
-border
-border-white/10
-px-5
-py-2
-text-sm
-text-white/60
-"
-
->
-
-{item}
-
-</div>
-
-))
-
-}
-
-</div>
-
-
-</div>
-
-
-</section>
-
-)
-
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <section className="hero">
+      <motion.div
+        className="hero-glow"
+        aria-hidden="true"
+        animate={reduceMotion ? undefined : { opacity: [.45, .75, .45], scale: [1, 1.06, 1] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      <div className="hero-inner">
+        <motion.div
+          className="hero-copy-block"
+          initial={{ opacity: 0, x: reduceMotion ? 0 : -28 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: .8, ease: [.22, 1, .36, 1] }}
+        >
+          <p className="eyebrow hero-kicker">Digital experiences. Built for the future.</p>
+          <h1 className="hero-title">
+            <span>Websites are</span>
+            <span>everywhere.</span>
+            <span className="hero-gradient-text">Experiences</span>
+            <span className="hero-gradient-text">are not.</span>
+          </h1>
+          <p className="hero-copy">
+            Premium websites, web applications, and creative platforms built
+            with modern technology and immersive design.
+          </p>
+          <div className="hero-actions">
+            <a className="button hero-primary" href="#work">Explore work <span>→</span></a>
+            <a className="button" href="/contact">Start a project <span>↗</span></a>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="hero-showcase"
+          initial={{ opacity: 0, x: reduceMotion ? 0 : 46, scale: reduceMotion ? 1 : .97 }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, x: 0, scale: 1, y: [0, -7, 0] }}
+          transition={reduceMotion ? { duration: .3 } : { opacity: { delay: .2, duration: .9 }, x: { delay: .2, duration: .9 }, scale: { delay: .2, duration: .9 }, y: { delay: 1.1, duration: 7, repeat: Infinity, ease: "easeInOut" } }}
+        >
+          <Image
+            src="/hero-devices.png"
+            alt="Next Design project showcase featuring Brian Noland, ChuneLab, Solana Risk Radar, and Driftkid"
+            width={850}
+            height={450}
+            priority
+          />
+          <div className="hero-showcase-sheen" aria-hidden="true" />
+        </motion.div>
+
+        <motion.div className="hero-meta" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:1}}>
+          <span>Built with passion. Coded to perform.</span>
+        </motion.div>
+      </div>
+    </section>
+  );
 }
