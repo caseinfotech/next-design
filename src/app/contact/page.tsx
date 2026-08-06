@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { ArrowUpRight, Clock3, Mail, MapPin } from "lucide-react";
+import { Clock3, Mail, MapPin } from "lucide-react";
+import ContactForm from "@/components/ContactForm";
 
 export default function Contact(){
+  const turnstileSiteKey=process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY||"";
   return <main className="contact-page">
     <div className="contact-page-glow" aria-hidden="true" />
     <section className="contact-hero container">
@@ -21,19 +23,7 @@ export default function Contact(){
           <span>Project inquiry</span>
           <i>Available for select projects</i>
         </div>
-        <form action="mailto:hello@nextdesign.dev" method="post" encType="text/plain" className="contact-form">
-          <div className="form-row">
-            <label>Name<input required name="name" placeholder="Your name" /></label>
-            <label>Email<input required name="email" type="email" placeholder="you@company.com" /></label>
-          </div>
-          <label>Company or brand<input name="company" placeholder="Optional" /></label>
-          <label>What are we building?<select defaultValue="" name="project-type"><option value="" disabled>Select a project type</option><option>Real Estate Website</option><option>Music / Creative Platform</option><option>Boutique Brand Website</option><option>Custom Application</option></select></label>
-          <label>Project details<textarea required name="details" placeholder="Goals, audience, timeline, and anything else I should know…" rows={6}/></label>
-          <div className="contact-form-footer">
-            <span>No pressure. Just a thoughtful first conversation.</span>
-            <button type="submit" className="button hero-primary">Send inquiry <ArrowUpRight size={16}/></button>
-          </div>
-        </form>
+        <ContactForm siteKey={turnstileSiteKey}/>
       </div>
     </section>
     <section className="contact-note container">
