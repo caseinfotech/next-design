@@ -1,0 +1,107 @@
+"use client";
+
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+export default function FloatingContact() {
+
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50">
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{opacity:0, y:30, scale:.9}}
+            animate={{opacity:1, y:0, scale:1}}
+            exit={{opacity:0, y:30, scale:.9}}
+            className="
+              mb-5
+              w-[340px]
+              rounded-3xl
+              border
+              border-white/10
+              bg-black/90
+              backdrop-blur-xl
+              p-8
+              shadow-2xl
+            "
+          >
+
+            <h3 className="text-2xl font-bold">
+              Start a Project
+            </h3>
+
+            <p className="mt-3 text-white/60">
+              Tell us what you are building.
+            </p>
+
+            <div className="mt-6 space-y-3">
+
+              {[
+                "Website Design",
+                "Web Application",
+                "AI Product",
+                "Website Redesign"
+              ].map(item => (
+                <button
+                  key={item}
+                  className="
+                    w-full
+                    rounded-xl
+                    border
+                    border-white/10
+                    px-4
+                    py-3
+                    text-left
+                    hover:bg-white/10
+                  "
+                >
+                  {item}
+                </button>
+              ))}
+
+            </div>
+
+            <a
+              href="/contact"
+              className="
+                mt-6
+                block
+                rounded-full
+                bg-white
+                px-6
+                py-3
+                text-center
+                font-semibold
+                text-black
+              "
+            >
+              Start Your Project →
+            </a>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+      <button
+        onClick={() => setOpen(!open)}
+        className="
+          rounded-full
+          bg-gradient-to-r
+          from-purple-500
+          to-blue-500
+          px-7
+          py-4
+          font-semibold
+          shadow-xl
+        "
+      >
+        {open ? "Close" : "Start Project"}
+      </button>
+
+    </div>
+  );
+}
