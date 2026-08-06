@@ -1,0 +1,1 @@
+import Link from "next/link";export default function NotFound(){return <main style={{minHeight:"80vh",display:"grid",placeItems:"center",textAlign:"center",padding:30}}><div><div className="eyebrow">404</div><h1 className="section-title" style={{margin:"20px 0 30px"}}>This experience doesn’t exist.</h1><Link href="/" className="btn btn-primary">Return home</Link></div></main>}

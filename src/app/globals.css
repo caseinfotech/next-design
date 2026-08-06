@@ -1,0 +1,35 @@
+:root {
+  --bg: #050505;
+  --surface: rgba(255,255,255,.045);
+  --line: rgba(255,255,255,.10);
+  --text: #f7f7fb;
+  --muted: #a8a8b3;
+  --violet: #8b5cf6;
+  --blue: #3b82f6;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); }
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 20% 5%, rgba(124,58,237,.17), transparent 28%),
+    radial-gradient(circle at 90% 35%, rgba(37,99,235,.12), transparent 24%),
+    #050505;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+::selection { background: #7c3aed; color: white; }
+.container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+.eyebrow { text-transform: uppercase; letter-spacing: .26em; font-size: .72rem; color: #aaa7b5; }
+.display { font-size: clamp(3.2rem, 9vw, 8.5rem); line-height: .88; letter-spacing: -.07em; margin: 0; }
+.section-title { font-size: clamp(2.6rem, 6vw, 5.8rem); line-height: .95; letter-spacing: -.055em; margin: 0; }
+.glass { background: var(--surface); border: 1px solid var(--line); backdrop-filter: blur(20px); }
+.pill { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1rem; border: 1px solid var(--line); border-radius: 999px; color: #c9c7d1; font-size: .82rem; }
+.grid-noise { position: fixed; inset: 0; pointer-events: none; opacity: .12; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 72px 72px; mask-image: linear-gradient(to bottom, black, transparent 80%); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .6rem; border-radius: 999px; padding: 1rem 1.35rem; border: 1px solid var(--line); transition: .25s ease; }
+.btn:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.26); }
+.btn-primary { background: white; color: black; border-color: white; }
+@media (max-width: 720px) { .container { width: min(100% - 28px, 1180px); } }

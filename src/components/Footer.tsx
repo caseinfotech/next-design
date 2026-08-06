@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function Footer(){return <footer style={{borderTop:"1px solid var(--line)",padding:"34px 0 44px"}}><div className="container" style={{display:"flex",justifyContent:"space-between",gap:20,flexWrap:"wrap",color:"#85838f",fontSize:13}}><strong style={{color:"white"}}>NEXT DESIGN</strong><span>Designed and engineered with Next.js, TypeScript, and modern web technology.</span><div style={{display:"flex",gap:16}}><Link href="/work/brian-noland">Work</Link><Link href="/contact">Contact</Link></div></div></footer>}
