@@ -50,6 +50,18 @@ export const projects: Project[] = [
     image: "/projects/chunelab.png",
     imageWidth: 1199,
     imageHeight: 1312,
+    gallery: [
+      "/projects/chunelab-capture-home.webp",
+      "/projects/chunelab-capture-packs.webp",
+      "/projects/chunelab-capture-blueprints.webp",
+      "/projects/chunelab-capture-community.webp"
+    ],
+    galleryDimensions: [
+      {width:1440,height:1000},
+      {width:1280,height:720},
+      {width:1280,height:720},
+      {width:1280,height:720}
+    ],
     technologies: ["Next.js", "Supabase", "Audio UX", "AI Workflows"],
     accent: "blue"
   },
