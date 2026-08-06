@@ -17,7 +17,15 @@ export const projects: Project[] = [
     title: "Brian Noland",
     category: "Luxury Real Estate",
     description: "A premium digital platform designed around property storytelling, authority, speed, and lead generation.",
-    image: "/projects/brian-noland.png",
+    image: "/projects/brian-noland/hero.webp",
+    gallery: [
+      "/projects/brian-noland/desktop.webp",
+      "/projects/brian-noland/listings.webp",
+      "/projects/brian-noland/about.webp",
+      "/projects/brian-noland/mobile.webp"
+    ],
+    challenge: "Create a premium digital presence that represents local expertise while competing with larger real estate brands.",
+    solution: "A modern real estate experience focused on storytelling, property discovery, performance, and lead generation.",
     technologies: ["Next.js", "TypeScript", "Tailwind", "SEO", "MLS Ready"],
     accent: "violet"
   },
