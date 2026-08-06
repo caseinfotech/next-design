@@ -1,3 +1,5 @@
+"use client";
+
 const groups = {
   Frontend:["Next.js","React","TypeScript","Tailwind CSS","CSS"],
   Backend:["Supabase","PostgreSQL","APIs","Authentication"],
