@@ -8,7 +8,7 @@ export default function FloatingContact() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="floating-contact">
 
       <AnimatePresence>
         {open && (
@@ -16,7 +16,7 @@ export default function FloatingContact() {
             initial={{opacity:0, y:30, scale:.9}}
             animate={{opacity:1, y:0, scale:1}}
             exit={{opacity:0, y:30, scale:.9}}
-            className="
+            className="floating-contact-panel
               mb-5
               w-[340px]
               rounded-3xl
@@ -88,7 +88,7 @@ export default function FloatingContact() {
 
       <button
         onClick={() => setOpen(!open)}
-        className="
+        className="floating-contact-trigger
           rounded-full
           bg-red-500
           px-8
