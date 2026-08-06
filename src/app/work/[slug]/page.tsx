@@ -13,6 +13,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
   const projectIndex=projects.findIndex(p=>p.slug===slug);
   const nextProject=projects[(projectIndex+1)%projects.length];
   const heroImage=project.gallery?.[0] ?? project.image;
+  const heroDimensions=project.galleryDimensions?.[0] ?? {width:project.imageWidth,height:project.imageHeight};
   const challenge=project.challenge ?? "Create a distinctive digital presence with a clear point of view, premium visual credibility, and a structure capable of growing with the brand.";
   const solution=project.solution ?? "A focused experience combining strong art direction, deliberate content hierarchy, modern frontend architecture, and responsive interaction design.";
 
@@ -29,7 +30,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
           <div>{project.technologies.map(t=><span className="pill" key={t}>{t}</span>)}</div>
         </div>
       </div>
-      <div className="case-hero-media"><Image src={heroImage} alt={`${project.title} website experience`} fill priority sizes="(max-width: 900px) 100vw, 1320px" /></div>
+      <div className="case-hero-media"><Image src={heroImage} alt={`${project.title} website experience`} width={heroDimensions.width} height={heroDimensions.height} priority sizes="(max-width: 900px) 100vw, 1320px" /></div>
       <div className="case-meta">
         <div><small>Discipline</small><span>Strategy · Design · Development</span></div>
         <div><small>Experience</small><span>{project.category}</span></div>
@@ -45,7 +46,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     </section>
 
     {project.gallery && <section className="case-gallery container">
-      {project.gallery.slice(1).map((image,i)=><div className={`case-gallery-item case-gallery-${i+1}`} key={image}><Image src={image} alt={`${project.title} interface detail ${i+1}`} fill sizes="(max-width: 800px) 100vw, 70vw" /></div>)}
+      {project.gallery.slice(1).map((image,i)=>{const dimensions=project.galleryDimensions?.[i+1] ?? {width:project.imageWidth,height:project.imageHeight};return <div className={`case-gallery-item case-gallery-${i+1}`} key={image}><Image src={image} alt={`${project.title} interface detail ${i+1}`} width={dimensions.width} height={dimensions.height} sizes="(max-width: 800px) 100vw, 70vw" /></div>})}
     </section>}
 
     <section className="next-case container">
