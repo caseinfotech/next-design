@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock3, Mail, MapPin } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+
+export const metadata: Metadata = {
+  title: "Start a Web Design or Development Project",
+  description: "Contact Next Design in Asheville to discuss a premium website, custom application, AI product, real estate platform, or focused digital strategy engagement.",
+  alternates: { canonical: "/contact" },
+};
 
 export default function Contact(){
   const turnstileSiteKey=process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY||"";

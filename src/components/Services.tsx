@@ -12,11 +12,11 @@ import {
 } from "lucide-react";
 
 const services = [
-  [Building2, "Real Estate", "Premium agent and brokerage sites, property storytelling, lead systems, SEO architecture, MLS and IDX-ready experiences."],
-  [Music2, "Music & Creative", "Artist websites, label platforms, music technology interfaces, campaigns, immersive launches, and creative experiments."],
-  [Gem, "Boutique Brands", "Distinctive, high-touch websites for businesses that care about presentation, credibility, and standing apart."],
-  [Cpu, "Technology & SaaS", "High-converting product sites, AI experiences, launch strategy, and polished interfaces that make complex technology feel clear."],
-  [PanelsTopLeft, "Custom Applications", "SaaS interfaces, dashboards, AI tools, client portals, data products, and custom software experiences."],
+  [Building2, "Real Estate", "Premium agent and brokerage sites, property storytelling, lead systems, SEO architecture, MLS and IDX-ready experiences.", "/services/real-estate-websites"],
+  [Music2, "Music & Creative", "Artist websites, label platforms, music technology interfaces, campaigns, immersive launches, and creative experiments.", "/services/asheville-web-design"],
+  [Gem, "Boutique Brands", "Distinctive, high-touch websites for businesses that care about presentation, credibility, and standing apart.", "/services/asheville-web-design"],
+  [Cpu, "Technology & SaaS", "High-converting product sites, AI experiences, launch strategy, and polished interfaces that make complex technology feel clear.", "/services/ai-applications"],
+  [PanelsTopLeft, "Custom Applications", "SaaS interfaces, dashboards, AI tools, client portals, data products, and custom software experiences.", "/services/web-development"],
 ] as const;
 
 export default function Services() {
@@ -48,7 +48,7 @@ export default function Services() {
 
         <div className="services-carousel">
           <div ref={scroller} className="services-grid" aria-label="Industries we serve">
-            {services.map(([Icon, title, description], index) => (
+            {services.map(([Icon, title, description, href], index) => (
               <article
                 key={title}
                 className="service-card"
@@ -57,7 +57,7 @@ export default function Services() {
                 <Icon size={24} />
                 <h3>{title}</h3>
                 <p>{description}</p>
-                <a href="/contact">Learn more →</a>
+                <a href={href}>Learn more →</a>
               </article>
             ))}
           </div>

@@ -22,7 +22,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: .8, ease: [.22, 1, .36, 1] }}
         >
-          <p className="eyebrow hero-kicker">Digital experiences. Built for the future.</p>
+          <p className="eyebrow hero-kicker">Asheville web design &amp; development</p>
           <h1 className="hero-title">
             <span>Websites are</span>
             <span>everywhere.</span>
@@ -31,7 +31,7 @@ export default function Hero() {
           </h1>
           <p className="hero-copy">
             Premium websites, web applications, and creative platforms built
-            with modern technology and immersive design.
+            in Western North Carolina for ambitious brands everywhere.
           </p>
           <div className="hero-actions">
             <a className="button hero-primary" href="#work">Explore work <span>→</span></a>

@@ -1,10 +1,32 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/projects";
+import JsonLd from "@/components/JsonLd";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export function generateStaticParams(){return projects.map(({slug})=>({slug}))}
+
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
+  const {slug}=await params;
+  const project=projects.find(p=>p.slug===slug);
+  if(!project)return {};
+  const canonical=`/work/${project.slug}`;
+  return {
+    title:`${project.title} — ${project.category} Case Study`,
+    description:`See how Next Design approached ${project.title}, a ${project.category.toLowerCase()} experience built around strategy, design, performance, and growth.`,
+    alternates:{canonical},
+    openGraph:{
+      type:"article",
+      url:canonical,
+      title:`${project.title} — ${project.category} Case Study | Next Design`,
+      description:project.description,
+      images:[{url:project.image,width:project.imageWidth,height:project.imageHeight,alt:`${project.title} digital experience`}],
+    },
+  };
+}
 
 export default async function ProjectPage({params}:{params:Promise<{slug:string}>}){
   const {slug}=await params;
@@ -16,8 +38,34 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
   const heroDimensions=project.galleryDimensions?.[0] ?? {width:project.imageWidth,height:project.imageHeight};
   const challenge=project.challenge ?? "Create a distinctive digital presence with a clear point of view, premium visual credibility, and a structure capable of growing with the brand.";
   const solution=project.solution ?? "A focused experience combining strong art direction, deliberate content hierarchy, modern frontend architecture, and responsive interaction design.";
+  const projectUrl=absoluteUrl(`/work/${project.slug}`);
+  const schema={
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"CreativeWork",
+        "@id":`${projectUrl}#project`,
+        name:project.title,
+        description:project.description,
+        url:projectUrl,
+        image:absoluteUrl(project.image),
+        creator:{"@id":`${siteConfig.url}/#organization`},
+        genre:project.category,
+        keywords:project.technologies.join(", "),
+      },
+      {
+        "@type":"BreadcrumbList",
+        itemListElement:[
+          {"@type":"ListItem",position:1,name:"Home",item:siteConfig.url},
+          {"@type":"ListItem",position:2,name:"Selected work",item:absoluteUrl("/#work")},
+          {"@type":"ListItem",position:3,name:project.title,item:projectUrl},
+        ],
+      },
+    ],
+  };
 
   return <main className={`case-page case-${project.accent}`}>
+    <JsonLd data={schema}/>
     <section className="case-hero container">
       <Link href="/#work" className="case-back"><ArrowLeft size={15}/> Selected work</Link>
       <div className="case-hero-grid">

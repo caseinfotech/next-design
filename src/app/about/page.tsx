@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -7,12 +8,18 @@ const principles = [
   ["03","Distinct by design","The work should feel unmistakably connected to the client—not assembled from the same template as everyone else."],
 ];
 
+export const metadata: Metadata = {
+  title: "About Our Asheville Digital Studio",
+  description: "Meet Next Design, an independent Asheville digital studio combining strategy, premium web design, and modern development into one focused practice.",
+  alternates: { canonical: "/about" },
+};
+
 export default function About(){return <main className="about-page">
   <section className="about-hero container">
     <div className="about-copy">
       <div className="eyebrow">About Next Design</div>
       <h1>Where technology meets <span>creativity.</span></h1>
-      <p>Next Design is an independent digital studio creating immersive websites, custom applications, and brand experiences for ambitious businesses and creators.</p>
+      <p>Next Design is an independent Asheville digital studio creating immersive websites, custom applications, and brand experiences for ambitious businesses across Western North Carolina and beyond.</p>
       <Link href="/contact" className="button hero-primary">Start a conversation <ArrowUpRight size={16}/></Link>
     </div>
     <div className="about-orbit" aria-hidden="true">
