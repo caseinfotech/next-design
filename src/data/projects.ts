@@ -24,15 +24,17 @@ export const projects: Project[] = [
     imageWidth: 1199,
     imageHeight: 1312,
     gallery: [
-      "/projects/brian-noland/desktop.webp",
-      "/projects/brian-noland/listings.webp",
-      "/projects/brian-noland/about.webp",
+      "/projects/brian-noland/capture-home.webp",
+      "/projects/brian-noland/capture-properties.webp",
+      "/projects/brian-noland/capture-about.webp",
+      "/projects/brian-noland/capture-search.webp",
       "/projects/brian-noland/mobile.webp"
     ],
     galleryDimensions: [
-      {width:2610,height:1530},
-      {width:2624,height:1418},
-      {width:1199,height:1312},
+      {width:1430,height:993},
+      {width:1430,height:993},
+      {width:1430,height:993},
+      {width:1270,height:714},
       {width:1125,height:2436}
     ],
     challenge: "Create a premium digital presence that represents local expertise while competing with larger real estate brands.",
@@ -48,6 +50,18 @@ export const projects: Project[] = [
     image: "/projects/chunelab.png",
     imageWidth: 1199,
     imageHeight: 1312,
+    gallery: [
+      "/projects/chunelab-capture-home.webp",
+      "/projects/chunelab-capture-packs.webp",
+      "/projects/chunelab-capture-blueprints.webp",
+      "/projects/chunelab-capture-community.webp"
+    ],
+    galleryDimensions: [
+      {width:1440,height:1000},
+      {width:1280,height:720},
+      {width:1280,height:720},
+      {width:1280,height:720}
+    ],
     technologies: ["Next.js", "Supabase", "Audio UX", "AI Workflows"],
     accent: "blue"
   },

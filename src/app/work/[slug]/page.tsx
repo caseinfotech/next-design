@@ -23,7 +23,7 @@ export async function generateMetadata({params}:{params:Promise<{slug:string}>})
       url:canonical,
       title:`${project.title} — ${project.category} Case Study | Next Design`,
       description:project.description,
-      images:[{url:project.image,width:project.imageWidth,height:project.imageHeight,alt:`${project.title} digital experience`}],
+      images:[{url:project.gallery?.[0] ?? project.image,width:project.galleryDimensions?.[0]?.width ?? project.imageWidth,height:project.galleryDimensions?.[0]?.height ?? project.imageHeight,alt:`${project.title} digital experience`}],
     },
   };
 }
