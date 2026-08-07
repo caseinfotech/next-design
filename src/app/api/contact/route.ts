@@ -60,12 +60,21 @@ export async function POST(request:Request){
     return NextResponse.json({message:"The security check is temporarily unavailable. Please try again."},{status:502});
   }
 
-  const expectedHostname=process.env.TURNSTILE_EXPECTED_HOSTNAME;
+const expectedHostnames = ["nextdesign.dev", "www.nextdesign.dev"];
+
+  console.log({
+  turnstileSecret: !!turnstileSecret,
+  resendKey: !!resendKey,
+  fromEmail,
+  toEmail
+});
 
 if(
   !verification.success ||
   verification.action!=="contact" ||
-  (expectedHostname && verification.hostname!==expectedHostname)
+
+(verification.hostname && !expectedHostnames.includes(verification.hostname))
+
 ){
   console.log("TURNSTILE FAILED:", verification, {
     expectedHostname,
