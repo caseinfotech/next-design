@@ -19,7 +19,7 @@ function clean(value:unknown,max:number){return typeof value==="string"?value.tr
 function escapeHtml(value:string){return value.replace(/[&<>'"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[char]||char)}
 
 export async function POST(request:Request){
-  const turnstileSecret=process.env.TURNSTILE_SECRET_KEY;
+  const turnstileSecret=process.env.TURNSTILE_SECRET;
   const resendKey=process.env.RESEND_API_KEY;
   const fromEmail=process.env.CONTACT_FROM_EMAIL;
   const toEmail=process.env.CONTACT_TO_EMAIL;
