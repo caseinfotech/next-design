@@ -61,9 +61,23 @@ export async function POST(request:Request){
   }
 
   const expectedHostname=process.env.TURNSTILE_EXPECTED_HOSTNAME;
-  if(!verification.success||verification.action!=="contact"||(expectedHostname&&verification.hostname!==expectedHostname)){
-    return NextResponse.json({message:"The security check expired or failed. Please try again."},{status:403});
-  }
+
+if(
+  !verification.success ||
+  verification.action!=="contact" ||
+  (expectedHostname && verification.hostname!==expectedHostname)
+){
+  console.log("TURNSTILE FAILED:", verification, {
+    expectedHostname,
+    receivedAction: verification.action,
+    receivedHostname: verification.hostname
+  });
+
+  return NextResponse.json(
+    {message:"The security check expired or failed. Please try again."},
+    {status:403}
+  );
+}
 
   const safeName=escapeHtml(name);
   const safeEmail=escapeHtml(email);
