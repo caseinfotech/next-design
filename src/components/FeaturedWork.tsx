@@ -16,7 +16,9 @@ export default function FeaturedWork(){
       <p>Strategy, design, and engineering brought together as one focused digital experience.</p>
     </motion.div>
     <div className="work-grid">
-      {projects.map((p,i)=><motion.article key={p.slug} initial={{opacity:0,y:60}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"-80px"}} transition={{duration:.75,ease:[.22,1,.36,1]}} className={`work-card work-card-${p.accent}`}>
+      {projects.map((p,i)=>{
+        const showcaseImage=p.gallery?.[0];
+        return <motion.article key={p.slug} initial={{opacity:0,y:60}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"-80px"}} transition={{duration:.75,ease:[.22,1,.36,1]}} className={`work-card work-card-${p.accent}`}>
         <div className="work-card-copy" style={{order:i%2?2:1}}>
           <span className="eyebrow">0{i+1} / {p.category}</span>
           <h3>{p.title}</h3>
@@ -24,8 +26,10 @@ export default function FeaturedWork(){
           <div className="work-tags">{p.technologies.map(t=><span key={t} className="pill">{t}</span>)}</div>
           <Link className="work-link" href={`/work/${p.slug}`}>View case study <ArrowUpRight size={18}/></Link>
         </div>
-        <Link href={`/work/${p.slug}`} className="work-media" style={{order:i%2?1:2}} aria-label={`View ${p.title} case study`}><Image src={p.image} alt={`${p.title} project preview`} fill sizes="(max-width: 850px) 100vw, 55vw" /></Link>
-      </motion.article>)}
+        <Link href={`/work/${p.slug}`} className={`work-media ${showcaseImage?"":"work-media-placeholder"} work-media-${p.slug}`} style={{order:i%2?1:2}} aria-label={`View ${p.title} case study`}>
+          {showcaseImage ? <Image src={showcaseImage} alt={`${p.title} project preview`} fill sizes="(max-width: 850px) 100vw, 55vw" /> : <div className="work-placeholder"><span>Case study</span><strong>{p.title}</strong><p>{p.category}</p><i aria-hidden="true"/></div>}
+        </Link>
+      </motion.article>})}
     </div>
   </div></section>
 }
