@@ -19,7 +19,7 @@ function clean(value:unknown,max:number){return typeof value==="string"?value.tr
 function escapeHtml(value:string){return value.replace(/[&<>'"]/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[char]||char)}
 
 export async function POST(request:Request){
-  const turnstileSecret=process.env.TURNSTILE_SECRET_KEY;
+  const turnstileSecret=process.env.TURNSTILE_SECRET;
   const resendKey=process.env.RESEND_API_KEY;
   const fromEmail=process.env.CONTACT_FROM_EMAIL;
   const toEmail=process.env.CONTACT_TO_EMAIL;
@@ -60,10 +60,33 @@ export async function POST(request:Request){
     return NextResponse.json({message:"The security check is temporarily unavailable. Please try again."},{status:502});
   }
 
-  const expectedHostname=process.env.TURNSTILE_EXPECTED_HOSTNAME;
-  if(!verification.success||verification.action!=="contact"||(expectedHostname&&verification.hostname!==expectedHostname)){
-    return NextResponse.json({message:"The security check expired or failed. Please try again."},{status:403});
-  }
+const expectedHostnames = ["nextdesign.dev", "www.nextdesign.dev"];
+
+  console.log({
+  turnstileSecret: !!turnstileSecret,
+  resendKey: !!resendKey,
+  fromEmail,
+  toEmail
+});
+
+if(
+  !verification.success ||
+  verification.action!=="contact" ||
+
+(verification.hostname && !expectedHostnames.includes(verification.hostname))
+
+){
+  console.log("TURNSTILE FAILED:", verification, {
+    expectedHostname,
+    receivedAction: verification.action,
+    receivedHostname: verification.hostname
+  });
+
+  return NextResponse.json(
+    {message:"The security check expired or failed. Please try again."},
+    {status:403}
+  );
+}
 
   const safeName=escapeHtml(name);
   const safeEmail=escapeHtml(email);

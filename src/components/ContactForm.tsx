@@ -3,10 +3,13 @@
 import Script from "next/script";
 import { FormEvent, useState } from "react";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { div } from "framer-motion/m";
 
 declare global {
   interface Window {
-    turnstile?: { reset: () => void };
+    turnstile?: {
+      reset: () => void;
+    };
   }
 }
 
@@ -15,7 +18,7 @@ type FormState = { type: "idle" | "loading" | "success" | "error"; message?: str
 
 export default function ContactForm({siteKey}:ContactFormProps){
   const [state,setState]=useState<FormState>({type:"idle"});
-
+  const [turnstileComplete,setTurnstileComplete]=useState(false);
   async function handleSubmit(event:FormEvent<HTMLFormElement>){
     event.preventDefault();
     if(state.type==="loading")return;
@@ -66,7 +69,13 @@ export default function ContactForm({siteKey}:ContactFormProps){
       <label>Project details<textarea required name="details" minLength={20} maxLength={5000} placeholder="Goals, audience, timeline, and anything else I should know…" rows={6}/></label>
       <label className="contact-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <div className="turnstile-row">
-        {siteKey?<div className="cf-turnstile" data-sitekey={siteKey} data-theme="dark" data-size="flexible" data-action="contact" data-refresh-expired="auto" />:<p>Secure form delivery is being configured. You can email <a href="mailto:hello@nextdesign.dev">hello@nextdesign.dev</a> in the meantime.</p>}
+{siteKey?<div
+  className="cf-turnstile"
+  data-sitekey={siteKey}
+  data-theme="dark"
+  data-size="flexible"
+  data-action="contact"
+/>:<p>Secure form delivery is being configured. You can email <a href="mailto:hello@nextdesign.dev">hello@nextdesign.dev</a> in the meantime.</p>}
       </div>
       <div className="contact-form-footer">
         <span>No pressure. Just a thoughtful first conversation.</span>

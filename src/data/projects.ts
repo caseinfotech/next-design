@@ -20,10 +20,11 @@ export const projects: Project[] = [
     title: "Brian Noland",
     category: "Luxury Real Estate",
     description: "A premium digital platform designed around property storytelling, authority, speed, and lead generation.",
-    image: "/projects/brian-noland/hero.webp",
-    imageWidth: 1199,
-    imageHeight: 1312,
+    image: "/projects/brian-noland/mountains.jpg",
+    imageWidth: 2520,
+    imageHeight: 1458,
     gallery: [
+      "/projects/brian-noland/mountains.jpg",
       "/projects/brian-noland/capture-home.webp",
       "/projects/brian-noland/capture-properties.webp",
       "/projects/brian-noland/capture-about.webp",
@@ -31,6 +32,7 @@ export const projects: Project[] = [
       "/projects/brian-noland/mobile.webp"
     ],
     galleryDimensions: [
+      {width:2520,height:1458},
       {width:1430,height:993},
       {width:1430,height:993},
       {width:1430,height:993},
@@ -47,9 +49,9 @@ export const projects: Project[] = [
     title: "ChuneLab",
     category: "Music Technology",
     description: "A cinematic creative platform exploring music, AI-assisted workflows, and immersive interaction design.",
-    image: "/projects/chunelab.png",
-    imageWidth: 1199,
-    imageHeight: 1312,
+    image: "/projects/chunelab-capture-home.webp",
+    imageWidth: 1440,
+    imageHeight: 1000,
     gallery: [
       "/projects/chunelab-capture-home.webp",
       "/projects/chunelab-capture-packs.webp",
@@ -62,18 +64,32 @@ export const projects: Project[] = [
       {width:1280,height:720},
       {width:1280,height:720}
     ],
+    challenge: "Create a digital experience that connects music creation, AI-assisted workflows, and a creative community.",
+    solution: "A modern platform combining immersive design, audio experiences, and AI-powered creative tools.",
     technologies: ["Next.js", "Supabase", "Audio UX", "AI Workflows"],
     accent: "blue"
   },
   {
     slug: "solana-risk-radar",
-    title: "Solana Risk Radar",
-    category: "Data Application",
-    description: "A technical dashboard experience focused on risk intelligence, clarity, and responsive data visualization.",
-    image: "/projects/solana-risk-radar.png",
-    imageWidth: 1209,
-    imageHeight: 1301,
-    technologies: ["React", "TypeScript", "APIs", "Data Visualization"],
+    title: "Solscan/X",
+    category: "Blockchain Intelligence Platform",
+    description: "An AI-powered Solana intelligence platform focused on risk analysis, analytics, and real-time ecosystem insights.",
+    image: "/projects/solscan-x/solscanx-hero.webp",
+    imageWidth: 1600,
+    imageHeight: 900,
+    gallery: [
+      "/projects/solscan-x/solscanx-dashboard.webp",
+      "/projects/solscan-x/solscanx-analytics.webp",
+      "/projects/solscan-x/solscanx-mobile.webp"
+    ],
+    galleryDimensions: [
+      {width:1600,height:900},
+      {width:1600,height:900},
+      {width:900,height:1900}
+    ],
+    challenge: "Create clarity in a complex blockchain environment where users need fast, reliable intelligence before making decisions.",
+    solution: "A modern analytics experience combining AI-assisted insights, risk visualization, and responsive dashboard design.",
+    technologies: ["React", "TypeScript", "Solana", "APIs", "Data Visualization", "AI Workflows"],
     accent: "cyan"
   },
   {
@@ -82,8 +98,8 @@ export const projects: Project[] = [
     category: "Creative Experience",
     description: "A music-first digital identity blending atmosphere, motion, visual storytelling, and artist discovery.",
     image: "/projects/driftkid.png",
-    imageWidth: 1199,
-    imageHeight: 1312,
+    imageWidth: 2520,
+    imageHeight: 1458,
     technologies: ["Creative Direction", "Motion", "Brand UX", "Next.js"],
     accent: "pink"
   }

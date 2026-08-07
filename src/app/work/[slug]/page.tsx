@@ -87,10 +87,21 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     </section>
 
     <section className="case-story container">
-      <div><span className="eyebrow">01 / The challenge</span><h2>Create presence,<br/>not decoration.</h2></div>
-      <p>{challenge}</p>
-      <div><span className="eyebrow">02 / The solution</span><h2>Design and technology<br/>working as one.</h2></div>
-      <p>{solution}</p>
+      <div className="story-row">
+        <div>
+          <span className="eyebrow">01 / The challenge</span>
+          <h2>Create presence,<br/>not decoration.</h2>
+        </div>
+        <p>{challenge}</p>
+      </div>
+
+      <div className="story-row">
+        <div>
+          <span className="eyebrow">02 / The solution</span>
+          <h2>Design and technology<br/>working as one.</h2>
+        </div>
+        <p>{solution}</p>
+      </div>
     </section>
 
     {project.gallery && <section className="case-gallery container">
