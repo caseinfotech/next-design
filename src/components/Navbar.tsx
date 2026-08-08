@@ -25,7 +25,10 @@ export default function Navbar() {
   return <>
     <header className="site-header">
       <div className="site-nav">
-        <Link href="/" className="site-logo" aria-label="Next Design home"><span>NEXT</span><small>DESIGN</small></Link>
+        <Link href="/" className="site-logo" aria-label="Next Design home">
+          <span className="site-logo-word">NEXT</span>
+          <span className="site-logo-sub">DESIGN</span>
+        </Link>
         <nav className="desktop-nav">
           {links.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
         </nav>

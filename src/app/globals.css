@@ -475,23 +475,41 @@ button, input, textarea, select { font: inherit; }
 }
 
 .site-logo {
+  position: relative;
   width: fit-content;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 48px;
-  font-size: 1.48rem;
+  gap: 8px;
+  min-width: 108px;
+  min-height: 58px;
   font-weight: 900;
-  letter-spacing: .2em;
-  line-height: .72;
+  line-height: 1;
 }
 
-.site-logo small {
+.site-logo-word {
   display: block;
-  padding: 8px 0 0 3px;
-  font-size: .45rem;
-  letter-spacing: .58em;
+  font-size: 1.82rem;
+  letter-spacing: .18em;
+  line-height: .78;
+}
+
+.site-logo-sub {
+  display: block;
+  padding-left: 3px;
+  font-size: .5rem;
+  letter-spacing: .55em;
   line-height: 1;
+}
+
+.site-logo::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  right: 5px;
+  bottom: 1px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,.38), rgba(139,92,246,.25), transparent);
 }
 
 .desktop-nav {
@@ -873,6 +891,9 @@ button, input, textarea, select { font: inherit; }
 
 @media (max-width: 720px) {
   .site-header { height: 88px; }
+  .site-logo { min-width: 96px; min-height: 54px; gap: 7px; }
+  .site-logo-word { font-size: 1.62rem; }
+  .site-logo-sub { font-size: .45rem; }
   .hero { padding-top: 88px; }
   .hero-copy-block { padding-top: 48px; }
   .hero-title { font-size: clamp(3rem,15vw,4.5rem); }
