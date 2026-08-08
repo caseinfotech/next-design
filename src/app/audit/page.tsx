@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AuditRequestForm from "@/components/AuditRequestForm";
 import "./audit.css";
 
 export const metadata: Metadata = {
@@ -29,6 +30,7 @@ const deliverables = [
 function Arrow() { return <span aria-hidden="true">↗</span>; }
 
 export default function AuditPage() {
+  const turnstileSiteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
   return <main className="auditPage" id="top">
     <section className="auditHero">
       <div className="auditEyebrow"><span>Website intelligence / UX review</span><span>Next Design · Asheville, NC</span></div>
@@ -44,6 +46,6 @@ export default function AuditPage() {
       <article className="featured"><span>Professional audit</span><h3>Full diagnosis</h3><strong>$499</strong><p>A comprehensive UX and website health review with a prioritized improvement plan.</p><ul><li>Multi-page audit</li><li>Seven review categories</li><li>Annotated PDF report</li><li>Prioritized recommendations</li><li>Review walkthrough</li></ul><a href="#request">Request your audit <Arrow /></a></article>
       <article><span>Redesign strategy</span><h3>Next chapter</h3><strong>Custom</strong><p>Audit, positioning, structure, and creative direction for a larger redesign engagement.</p><ul><li>Everything in the full audit</li><li>Content and page strategy</li><li>Redesign roadmap</li></ul><a href="#request">Discuss a redesign <Arrow /></a></article>
     </div></section>
-    <section className="auditRequest" id="request"><div><p>05 / Start here</p><h2>Ready for the<br /><em>honest version?</em></h2></div><div className="requestCard"><span>Send your website URL and tell us what is not working—or what you want to improve.</span><a href="mailto:info@nextdesign.dev?subject=Website%20audit%20request&body=Website%20URL%3A%20%0A%0AMain%20goal%3A%20%0A%0AWhat%20I%27d%20like%20reviewed%3A%20">Request a website audit <Arrow /></a><small>info@nextdesign.dev</small></div></section>
+    <section className="auditRequest" id="request"><div className="auditRequestIntro"><p>05 / Start here</p><h2>Ready for the<br /><em>honest version?</em></h2><span>Share your website and what you want it to do better. We’ll review the request and recommend the right depth—without pushing you into more than you need.</span></div><AuditRequestForm siteKey={turnstileSiteKey} /></section>
   </main>;
 }

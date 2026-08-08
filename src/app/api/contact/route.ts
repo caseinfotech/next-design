@@ -8,9 +8,13 @@ const PROJECT_TYPES = new Set([
   "Boutique Brand Website",
   "Technology / SaaS",
   "Custom Application",
+  "Free Mini Review",
+  "$499 Professional Audit",
+  "Redesign Strategy",
 ]);
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const AUDIT_TYPES = new Set(["Free Mini Review", "$499 Professional Audit", "Redesign Strategy"]);
 
 type ContactPayload = {
   name?: unknown;
@@ -18,6 +22,9 @@ type ContactPayload = {
   company?: unknown;
   projectType?: unknown;
   details?: unknown;
+  siteUrl?: unknown;
+  businessGoal?: unknown;
+  concern?: unknown;
   website?: unknown;
   turnstileToken?: unknown;
 };
@@ -38,6 +45,15 @@ function escapeHtml(value: string) {
         '"': "&quot;",
       })[char] || char
   );
+}
+
+function isSafeWebsiteUrl(value: string) {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" || url.protocol === "http:";
+  } catch {
+    return false;
+  }
 }
 
 export async function POST(request: Request) {
@@ -76,14 +92,19 @@ export async function POST(request: Request) {
   const company = clean(payload.company, 120);
   const projectType = clean(payload.projectType, 80);
   const details = clean(payload.details, 5000);
+  const siteUrl = clean(payload.siteUrl, 500);
+  const businessGoal = clean(payload.businessGoal, 2500);
+  const concern = clean(payload.concern, 2500);
   const token = clean(payload.turnstileToken, 2048);
+  const isAuditRequest = AUDIT_TYPES.has(projectType);
 
   if (
     !name ||
     !EMAIL_PATTERN.test(email) ||
     !PROJECT_TYPES.has(projectType) ||
     details.length < 20 ||
-    !token
+    !token ||
+    (isAuditRequest && (!isSafeWebsiteUrl(siteUrl) || businessGoal.length < 10 || concern.length < 10))
   ) {
     return NextResponse.json(
       { message: "Please complete every required field." },
@@ -158,6 +179,9 @@ export async function POST(request: Request) {
   const safeCompany = escapeHtml(company || "Not provided");
   const safeProject = escapeHtml(projectType);
   const safeDetails = escapeHtml(details).replace(/\n/g, "<br />");
+  const safeSiteUrl = escapeHtml(siteUrl || "Not provided");
+  const safeBusinessGoal = escapeHtml(businessGoal).replace(/\n/g, "<br />");
+  const safeConcern = escapeHtml(concern).replace(/\n/g, "<br />");
 
   const subject = `New ${projectType} inquiry from ${name}`.replace(
     /[\r\n]/g,
@@ -187,6 +211,9 @@ Name: ${name}
 Email: ${email}
 Company: ${company || "Not provided"}
 Project type: ${projectType}
+Website: ${siteUrl || "Not provided"}
+${businessGoal ? `Business goal: ${businessGoal}` : ""}
+${concern ? `Biggest concern: ${concern}` : ""}
 
 Project details:
 ${details}`,
@@ -217,7 +244,13 @@ ${safeProject}
 <td style="padding:10px 0;color:#666">Company</td>
 <td style="padding:10px 0">${safeCompany}</td>
 </tr>
+<tr>
+<td style="padding:10px 0;color:#666">Website</td>
+<td style="padding:10px 0">${siteUrl ? `<a href="${safeSiteUrl}">${safeSiteUrl}</a>` : safeSiteUrl}</td>
+</tr>
 </table>
+
+${businessGoal ? `<div style="margin-top:28px;padding:22px;background:#f5f3ff;border-radius:12px;line-height:1.65"><strong>Business goal</strong><p>${safeBusinessGoal}</p><strong>Biggest concern</strong><p>${safeConcern}</p></div>` : ""}
 
 <div style="margin-top:28px;padding:22px;background:#f5f3ff;border-radius:12px;line-height:1.65">
 <strong>Project details</strong>
