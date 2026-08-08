@@ -4,7 +4,7 @@ import AuditRequestForm from "@/components/AuditRequestForm";
 import "./audit.css";
 
 export const metadata: Metadata = {
-  title: "Website Audit & UX Review | Next Design",
+  title: "Website Audit & UX Review",
   description: "A strategic website and UX audit revealing conversion issues, design opportunities, performance problems, and a prioritized path forward.",
   alternates: { canonical: "https://www.nextdesign.dev/audit" },
 };

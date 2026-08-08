@@ -36,7 +36,7 @@ export default function Contact(){
     <section className="contact-note container">
       <span>Not ready for a full project?</span>
       <p>Website audits and focused strategy engagements are also available.</p>
-      <Link href="/#services">Explore capabilities →</Link>
+      <Link href="/audit">Explore website audits →</Link>
     </section>
   </main>
 }

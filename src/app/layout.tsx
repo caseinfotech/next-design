@@ -3,7 +3,6 @@ import { Analytics } from "@vercel/analytics/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
-import FloatingContact from "@/components/FloatingContact";
 import JsonLd from "@/components/JsonLd";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -81,4 +80,4 @@ const organizationSchema = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body>
-<JsonLd data={organizationSchema}/><FloatingContact /><Navbar/>{children}<Footer/><Analytics/></body></html>}
+<JsonLd data={organizationSchema}/><a className="skip-link" href="#main-content">Skip to content</a><Navbar/><div id="main-content" tabIndex={-1}>{children}</div><Footer/><Analytics/></body></html>}

@@ -49,9 +49,9 @@ export const projects: Project[] = [
     title: "ChuneLab",
     category: "Music Technology",
     description: "A cinematic creative platform exploring music, AI-assisted workflows, and immersive interaction design.",
-    image: "/projects/chunelab-capture-home.webp",
-    imageWidth: 1440,
-    imageHeight: 1000,
+    image: "/projects/chunelab-card.webp",
+    imageWidth: 1672,
+    imageHeight: 941,
     gallery: [
       "/projects/chunelab-capture-home.webp",
       "/projects/chunelab-capture-packs.webp",
@@ -74,9 +74,9 @@ export const projects: Project[] = [
     title: "Solscan/X",
     category: "Blockchain Intelligence Platform",
     description: "An AI-powered Solana intelligence platform focused on risk analysis, analytics, and real-time ecosystem insights.",
-    image: "/projects/solscan-x/solscanx-hero.webp",
-    imageWidth: 1600,
-    imageHeight: 900,
+    image: "/projects/solscanx-card.webp",
+    imageWidth: 1672,
+    imageHeight: 941,
     gallery: [
       "/projects/solscan-x/solscanx-dashboard.webp",
       "/projects/solscan-x/solscanx-analytics.webp",
@@ -97,9 +97,9 @@ export const projects: Project[] = [
     title: "Driftkid",
     category: "Creative Experience",
     description: "A music-first digital identity blending atmosphere, motion, visual storytelling, and artist discovery.",
-    image: "/projects/driftkid.png",
-    imageWidth: 2520,
-    imageHeight: 1458,
+    image: "/projects/driftkid-card.webp",
+    imageWidth: 1672,
+    imageHeight: 941,
     technologies: ["Creative Direction", "Motion", "Brand UX", "Next.js"],
     accent: "pink"
   }
