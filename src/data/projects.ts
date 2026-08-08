@@ -20,9 +20,9 @@ export const projects: Project[] = [
     title: "Brian Noland",
     category: "Luxury Real Estate",
     description: "A premium digital platform designed around property storytelling, authority, speed, and lead generation.",
-    image: "/projects/brian-noland/mountains.jpg",
-    imageWidth: 2520,
-    imageHeight: 1458,
+    image: "/projects/brian-noland-card.webp",
+    imageWidth: 1672,
+    imageHeight: 941,
     gallery: [
       "/projects/brian-noland/mountains.jpg",
       "/projects/brian-noland/capture-home.webp",

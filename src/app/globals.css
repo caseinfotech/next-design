@@ -460,17 +460,22 @@ button, input, textarea, select { font: inherit; }
 
 .site-logo {
   width: fit-content;
-  font-size: 1.25rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 48px;
+  font-size: 1.48rem;
   font-weight: 900;
-  letter-spacing: .18em;
-  line-height: .82;
+  letter-spacing: .2em;
+  line-height: .72;
 }
 
 .site-logo small {
   display: block;
-  padding-left: 3px;
-  font-size: .42rem;
-  letter-spacing: .48em;
+  padding: 8px 0 0 3px;
+  font-size: .45rem;
+  letter-spacing: .58em;
+  line-height: 1;
 }
 
 .desktop-nav {
@@ -1559,4 +1564,3 @@ button, input, textarea, select { font: inherit; }
 }
 
 }
-
