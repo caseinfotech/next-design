@@ -19,7 +19,7 @@ export default function Contact(){
         <h1>Let&apos;s build something <span>unforgettable.</span></h1>
         <p>Tell me what you&apos;re building, who it needs to reach, and what a successful launch looks like.</p>
         <div className="contact-quick-info">
-          <a href="mailto:hello@nextdesign.dev"><Mail size={17}/><span><small>Email</small>hello@nextdesign.dev</span></a>
+          <a href="mailto:info@nextdesign.dev"><Mail size={17}/><span><small>Email</small>info@nextdesign.dev</span></a>
           <div><MapPin size={17}/><span><small>Based in</small>Asheville, North Carolina</span></div>
           <div><Clock3 size={17}/><span><small>Typical response</small>Within one business day</span></div>
         </div>

@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const links = [["Work", "/#work"], ["Services", "/#services"], ["About", "/about"], ["Lab", "/lab"], ["Contact", "/contact"]];
+  const links = [["Work", "/#work"], ["Services", "/#services"], ["Audit", "/audit"], ["About", "/about"], ["Lab", "/lab"], ["Contact", "/contact"]];
 
   return <>
     <header className="site-header">

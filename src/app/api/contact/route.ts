@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          "Contact delivery is not configured yet. Please email hello@nextdesign.dev.",
+          "Contact delivery is not configured yet. Please email info@nextdesign.dev.",
       },
       { status: 503 }
     );
@@ -238,7 +238,7 @@ ${safeProject}
     return NextResponse.json(
       {
         message:
-          "Email delivery is temporarily unavailable. Please email hello@nextdesign.dev.",
+          "Email delivery is temporarily unavailable. Please email info@nextdesign.dev.",
       },
       { status: 502 }
     );
@@ -248,7 +248,7 @@ ${safeProject}
     return NextResponse.json(
       {
         message:
-          "Your inquiry could not be delivered. Please email hello@nextdesign.dev.",
+          "Your inquiry could not be delivered. Please email info@nextdesign.dev.",
       },
       { status: 502 }
     );

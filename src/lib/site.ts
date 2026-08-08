@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Next Design",
   url: "https://www.nextdesign.dev",
-  email: "hello@nextdesign.dev",
+  email: "info@nextdesign.dev",
   location: "Asheville, North Carolina",
   description:
     "Asheville web design and development studio creating premium websites, custom applications, and AI-powered digital experiences.",

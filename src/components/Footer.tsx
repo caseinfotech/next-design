@@ -5,6 +5,7 @@ const footerLinks = [
   ["Development", "/services/web-development"],
   ["AI Applications", "/services/ai-applications"],
   ["Real Estate", "/services/real-estate-websites"],
+  ["Website Audit", "/audit"],
   ["Work", "/#work"],
   ["Contact", "/contact"],
 ];

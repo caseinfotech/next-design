@@ -75,7 +75,7 @@ export default function ContactForm({siteKey}:ContactFormProps){
   data-theme="dark"
   data-size="flexible"
   data-action="contact"
-/>:<p>Secure form delivery is being configured. You can email <a href="mailto:hello@nextdesign.dev">hello@nextdesign.dev</a> in the meantime.</p>}
+/>:<p>Secure form delivery is being configured. You can email <a href="mailto:info@nextdesign.dev">info@nextdesign.dev</a> in the meantime.</p>}
       </div>
       <div className="contact-form-footer">
         <span>No pressure. Just a thoughtful first conversation.</span>
