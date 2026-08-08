@@ -105,7 +105,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     </section>
 
     {project.gallery && <section className="case-gallery container">
-      {project.gallery.map((image,i)=>{const dimensions=project.galleryDimensions?.[i] ?? {width:project.imageWidth,height:project.imageHeight};return <div className={`case-gallery-item case-gallery-${i+1}`} key={image}><Image src={image} alt={`${project.title} interface detail ${i+1}`} width={dimensions.width} height={dimensions.height} sizes="(max-width: 800px) 100vw, 70vw" /></div>})}
+      {project.gallery.map((image,i)=>{const dimensions=project.galleryDimensions?.[i] ?? {width:project.imageWidth,height:project.imageHeight};const isPortrait=dimensions.height>dimensions.width*1.25;return <div className={`case-gallery-item case-gallery-${i+1}${isPortrait?" is-portrait":""}`} key={image}><Image src={image} alt={`${project.title} interface detail ${i+1}`} width={dimensions.width} height={dimensions.height} sizes={isPortrait?"(max-width: 800px) 86vw, 360px":"(max-width: 800px) 100vw, 1080px"} /></div>})}
     </section>}
 
     <section className="next-case container">
