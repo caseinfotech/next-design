@@ -24,7 +24,6 @@ export const projects: Project[] = [
     imageWidth: 1672,
     imageHeight: 941,
     gallery: [
-      "/projects/brian-noland/mountains.jpg",
       "/projects/brian-noland/capture-home.webp",
       "/projects/brian-noland/capture-properties.webp",
       "/projects/brian-noland/capture-about.webp",
@@ -32,7 +31,6 @@ export const projects: Project[] = [
       "/projects/brian-noland/mobile.webp"
     ],
     galleryDimensions: [
-      {width:2520,height:1458},
       {width:1430,height:993},
       {width:1430,height:993},
       {width:1430,height:993},
