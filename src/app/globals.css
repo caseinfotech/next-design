@@ -1101,9 +1101,15 @@ button, input, textarea, select { font: inherit; }
 .contact-form-footer > span { max-width: 220px; color: #74717d; font-size: .7rem; line-height: 1.5; }
 .contact-form-footer .button { min-height: 48px; padding: 0 22px; border-radius: 8px; text-transform: uppercase; letter-spacing: .1em; font-size: .65rem; font-weight: 800; cursor: pointer; }
 .contact-form-footer .button:disabled { opacity: .48; cursor: not-allowed; box-shadow: none; }
+.hold-submit { position: relative; isolation: isolate; min-width: 226px; overflow: hidden; user-select: none; touch-action: none; }
+.hold-submit-progress { position: absolute; inset: 0; z-index: -1; transform-origin: left center; background: rgba(255,255,255,.2); transition: transform .12s linear; }
+.hold-submit.is-holding .hold-submit-progress { transition: none; }
+.hold-submit-label { position: relative; z-index: 1; width: 100%; display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; pointer-events: none; }
+.hold-submit:not(:disabled):active { transform: translateY(0); }
+.hold-submit:disabled .hold-submit-progress { display: none; }
 .contact-honeypot { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
 .turnstile-row { min-height: 67px; display: flex; align-items: center; }
-.turnstile-row .cf-turnstile { width: 100%; min-height: 65px; }
+.turnstile-row .turnstile-widget { width: 100%; min-height: 65px; }
 .turnstile-row iframe { max-width: 100%; }
 .turnstile-row > p { margin: 0; padding: 13px 15px; border: 1px solid rgba(255,255,255,.09); border-radius: 8px; color: #9a96a3; font-size: .72rem; line-height: 1.55; }
 .turnstile-row > p a { color: #a978ff; }

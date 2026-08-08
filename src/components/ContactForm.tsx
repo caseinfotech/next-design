@@ -1,14 +1,15 @@
 "use client";
 
 import Script from "next/script";
-import { FormEvent, useState } from "react";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { div } from "framer-motion/m";
+import { FormEvent, useRef, useState } from "react";
+import { CheckCircle2 } from "lucide-react";
+import HoldToSubmitButton from "@/components/HoldToSubmitButton";
 
 declare global {
   interface Window {
     turnstile?: {
-      reset: () => void;
+      render: (container: HTMLElement, options: Record<string, unknown>) => string;
+      reset: (widgetId?: string) => void;
     };
   }
 }
@@ -19,6 +20,22 @@ type FormState = { type: "idle" | "loading" | "success" | "error"; message?: str
 export default function ContactForm({siteKey}:ContactFormProps){
   const [state,setState]=useState<FormState>({type:"idle"});
   const [turnstileComplete,setTurnstileComplete]=useState(false);
+  const turnstileContainer=useRef<HTMLDivElement>(null);
+  const turnstileWidgetId=useRef<string | null>(null);
+
+  function renderTurnstile(){
+    if(!window.turnstile||!turnstileContainer.current||turnstileWidgetId.current)return;
+    turnstileWidgetId.current=window.turnstile.render(turnstileContainer.current,{
+      sitekey:siteKey,
+      theme:"dark",
+      size:"flexible",
+      action:"contact",
+      callback:()=>setTurnstileComplete(true),
+      "expired-callback":()=>setTurnstileComplete(false),
+      "error-callback":()=>setTurnstileComplete(false),
+    });
+  }
+
   async function handleSubmit(event:FormEvent<HTMLFormElement>){
     event.preventDefault();
     if(state.type==="loading")return;
@@ -49,16 +66,18 @@ export default function ContactForm({siteKey}:ContactFormProps){
       const result=await response.json() as {message?:string};
       if(!response.ok)throw new Error(result.message||"The inquiry could not be sent.");
       form.reset();
-      window.turnstile?.reset();
+      window.turnstile?.reset(turnstileWidgetId.current||undefined);
+      setTurnstileComplete(false);
       setState({type:"success",message:"Thanks—your inquiry is on its way. I’ll be in touch within one business day."});
     }catch(error){
-      window.turnstile?.reset();
+      window.turnstile?.reset(turnstileWidgetId.current||undefined);
+      setTurnstileComplete(false);
       setState({type:"error",message:error instanceof Error?error.message:"Something went wrong. Please try again."});
     }
   }
 
   return <>
-    {siteKey&&<Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />}
+    {siteKey&&<Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={renderTurnstile} />}
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <label>Name<input required name="name" autoComplete="name" maxLength={100} placeholder="Your name" /></label>
@@ -69,17 +88,11 @@ export default function ContactForm({siteKey}:ContactFormProps){
       <label>Project details<textarea required name="details" minLength={20} maxLength={5000} placeholder="Goals, audience, timeline, and anything else I should know…" rows={6}/></label>
       <label className="contact-honeypot" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <div className="turnstile-row">
-{siteKey?<div
-  className="cf-turnstile"
-  data-sitekey={siteKey}
-  data-theme="dark"
-  data-size="flexible"
-  data-action="contact"
-/>:<p>Secure form delivery is being configured. You can email <a href="mailto:info@nextdesign.dev">info@nextdesign.dev</a> in the meantime.</p>}
+{siteKey?<div ref={turnstileContainer} className="turnstile-widget" />:<p>Secure form delivery is being configured. You can email <a href="mailto:info@nextdesign.dev">info@nextdesign.dev</a> in the meantime.</p>}
       </div>
       <div className="contact-form-footer">
         <span>No pressure. Just a thoughtful first conversation.</span>
-        <button type="submit" disabled={!siteKey||state.type==="loading"} className="button hero-primary">{state.type==="loading"?"Sending…":"Send inquiry"} <ArrowUpRight size={16}/></button>
+        <HoldToSubmitButton disabled={!siteKey||!turnstileComplete} loading={state.type==="loading"} label="send inquiry" className="button hero-primary" />
       </div>
       {state.type!=="idle"&&<p className={`contact-form-status is-${state.type}`} role="status" aria-live="polite">{state.type==="success"&&<CheckCircle2 size={17}/>} {state.message}</p>}
     </form>

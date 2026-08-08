@@ -1,14 +1,31 @@
 "use client";
 
 import Script from "next/script";
-import { FormEvent, useState } from "react";
-import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { FormEvent, useRef, useState } from "react";
+import { CheckCircle2 } from "lucide-react";
+import HoldToSubmitButton from "@/components/HoldToSubmitButton";
 
 type AuditRequestFormProps = { siteKey: string };
 type FormState = { type: "idle" | "loading" | "success" | "error"; message?: string };
 
 export default function AuditRequestForm({ siteKey }: AuditRequestFormProps) {
   const [state, setState] = useState<FormState>({ type: "idle" });
+  const [turnstileComplete, setTurnstileComplete] = useState(false);
+  const turnstileContainer = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
+
+  function renderTurnstile() {
+    if (!window.turnstile || !turnstileContainer.current || turnstileWidgetId.current) return;
+    turnstileWidgetId.current = window.turnstile.render(turnstileContainer.current, {
+      sitekey: siteKey,
+      theme: "dark",
+      size: "flexible",
+      action: "audit",
+      callback: () => setTurnstileComplete(true),
+      "expired-callback": () => setTurnstileComplete(false),
+      "error-callback": () => setTurnstileComplete(false),
+    });
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,16 +60,18 @@ export default function AuditRequestForm({ siteKey }: AuditRequestFormProps) {
       const result = await response.json() as { message?: string };
       if (!response.ok) throw new Error(result.message || "The audit request could not be sent.");
       form.reset();
-      window.turnstile?.reset();
+      window.turnstile?.reset(turnstileWidgetId.current || undefined);
+      setTurnstileComplete(false);
       setState({ type: "success", message: "Your audit request is in. I’ll review your website and reply within one business day." });
     } catch (error) {
-      window.turnstile?.reset();
+      window.turnstile?.reset(turnstileWidgetId.current || undefined);
+      setTurnstileComplete(false);
       setState({ type: "error", message: error instanceof Error ? error.message : "Something went wrong. Please try again." });
     }
   }
 
   return <>
-    {siteKey && <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="afterInteractive" />}
+    {siteKey && <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={renderTurnstile} />}
     <form className="auditForm" onSubmit={handleSubmit}>
       <div className="auditFormRow">
         <label>Name<input required name="name" autoComplete="name" maxLength={100} placeholder="Your name" /></label>
@@ -67,9 +86,9 @@ export default function AuditRequestForm({ siteKey }: AuditRequestFormProps) {
       <label>What is your biggest concern right now?<textarea required name="concern" minLength={10} maxLength={2500} rows={3} placeholder="Low conversion, confusing navigation, an outdated look, slow performance…" /></label>
       <label className="auditHoneypot" aria-hidden="true">Leave blank<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <div className="auditTurnstile">
-        {siteKey ? <div className="cf-turnstile" data-sitekey={siteKey} data-theme="dark" data-size="flexible" data-action="contact" /> : <p>Secure form delivery is being configured. Email <a href="mailto:info@nextdesign.dev">info@nextdesign.dev</a> in the meantime.</p>}
+        {siteKey ? <div ref={turnstileContainer} className="turnstile-widget" /> : <p>Secure form delivery is being configured. Email <a href="mailto:info@nextdesign.dev">info@nextdesign.dev</a> in the meantime.</p>}
       </div>
-      <div className="auditFormFooter"><span>No pressure. Just a thoughtful first review.</span><button type="submit" disabled={!siteKey || state.type === "loading"}>{state.type === "loading" ? "Sending…" : "Request your audit"} <ArrowUpRight size={16} /></button></div>
+      <div className="auditFormFooter"><span>No pressure. Just a thoughtful first review.</span><HoldToSubmitButton disabled={!siteKey || !turnstileComplete} loading={state.type === "loading"} label="request your audit" /></div>
       {state.type !== "idle" && <p className={`auditFormStatus is-${state.type}`} role="status" aria-live="polite">{state.type === "success" && <CheckCircle2 size={17} />} {state.message}</p>}
     </form>
   </>;
